@@ -12,6 +12,9 @@ export class ProduitsComponent implements OnInit {
   constructor(private produitService: ProduitService) {
     this.produits = produitService.listeProduits();
   }
-
+  supprimerProduit(p: Produit) {
+    let conf = confirm('Etes-vous sur ?');
+    if (conf) this.produitService.supprimerProduit(p);
+  }
   ngOnInit(): void {}
 }

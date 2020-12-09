@@ -35,4 +35,29 @@ export class ProduitService {
   ajouterProduits(prod: Produit) {
     this.produits.push(prod);
   }
+  supprimerProduit(prod: Produit) {
+    const index = this.produits.indexOf(prod, 0);
+    if (index > -1) {
+      this.produits.splice(index, 1);
+    }
+  }
+  consulterProduit(id: number): Produit {
+    return this.produits.find((p) => p.idProduit == id);
+  }
+  trierProduits() {
+    this.produits = this.produits.sort((n1, n2) => {
+      if (n1.idProduit > n2.idProduit) {
+        return 1;
+      }
+      if (n1.idProduit < n2.idProduit) {
+        return -1;
+      }
+      return 0;
+    });
+  }
+  updateProduit(p: Produit) {
+    this.supprimerProduit(p);
+    this.ajouterProduits(p);
+    this.trierProduits();
+  }
 }
